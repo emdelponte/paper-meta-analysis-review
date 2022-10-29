@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "name": "MA",
+  "description": "",
+  "proxyImages": true,
+  "defaultMap": "map-fjyDT2pD",
+  "defaultPerspective": null,
+  "attributeRelevance": {},
+  "attributes": [
+    {
+      "_id": "attr-77SNdoVx",
+      "name": "Connection Type",
+      "format": "string",
+      "private": false,
+      "limit": 1,
+      "category": "General",
+      "prompt": "list",
+      "locked": false,
+      "values": [],
+      "sort": false,
+      "cluster": false
+    },
+    {
+      "_id": "attr-qUffN2tN",
+      "name": "Description",
+      "format": "text",
+      "private": false,
+      "limit": 1,
+      "category": "General",
+      "prompt": "none",
+      "locked": false,
+      "values": [],
+      "sort": false,
+      "cluster": false
+    },
+    {
+      "_id": "attr-sA9iIjr3",
+      "name": "Element Type",
+      "format": "string",
+      "private": false,
+      "limit": 1,
+      "category": "General",
+      "prompt": "list",
+      "locked": false,
+      "values": [],
+      "sort": false,
+      "cluster": true
+    },
+    {
+      "_id": "attr-MJCMrstW",
+      "name": "Label",
+      "format": "string",
+      "private": false,
+      "limit": 1,
+      "category": "General",
+      "prompt": "autocomplete",
+      "locked": false,
+      "values": [],
+      "sort": false,
+      "cluster": false
+    },
+    {
+      "_id": "attr-jjrp4s0s",
+      "name": "Loop Type",
+      "format": "string",
+      "private": false,
+      "limit": 1,
+      "category": "General",
+      "prompt": "list",
+      "locked": false,
+      "values": [],
+      "sort": false,
+      "cluster": false
+    },
+    {
+      "_id": "attr-8RDw0yTI",
+      "name": "Tags",
+      "format": "string",
+      "private": false,
+      "limit": "none",
+      "category": "General",
+      "prompt": "autocomplete",
+      "locked": false,
+      "values": [],
+      "sort": false,
+      "cluster": true
+    }
+  ],
+  "elements": [],
+  "connections": [],
+  "loops": [],
+  "maps": [
+    {
+      "_id": "map-fjyDT2pD",
+      "name": "Untitled map",
+      "description": "Network of authors of meta-analysis papers in Plant Pathology",
+      "scale": 1,
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "src": "https://docs.google.com/spreadsheets/d/1QkzdzQ6FXXSrG49wgR9x8PuVE7yw5b6RrY7UO2wuYuU/edit?usp=sharing",
+      "defaultPerspective": "pers-8Sm7YLgJ",
+      "defaultElementBehavior": "floating",
+      "defaultConnectionDirection": "undirected"
+    }
+  ],
+  "perspectives": [
+    {
+      "_id": "pers-8Sm7YLgJ",
+      "name": "Untitled view",
+      "style": "@settings {\n  template: big-data;\n}\n\n"
+    }
+  ]
+}
