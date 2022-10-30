@@ -1,12 +1,12 @@
 {
-    "id": "F1DEB02C",
+    "id": "F49428C5",
     "path": "~/Documents/GitHub/paper_meta-analysis-review/manuscript.qmd",
     "project_path": "manuscript.qmd",
     "type": "quarto_markdown",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1666996810527.0,
+    "created": 1667152331277.0,
     "source_on_save": true,
     "relative_order": 1,
     "properties": {
@@ -16,17 +16,17 @@
         "source_window_id": "",
         "Source": "Source",
         "docOutlineVisible": "1",
-        "cursorPosition": "10,0",
-        "scrollLine": "295",
-        "rmdVisualModeLocation": "148:0",
+        "cursorPosition": "363,0",
+        "scrollLine": "0",
+        "rmdVisualModeLocation": "8029:8630",
         "rmdVisualCollapsedChunks": ""
     },
     "folds": "",
-    "lastKnownWriteTime": 1667091105,
+    "lastKnownWriteTime": 1667153369,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1667091105280,
+    "last_content_update": 1667153369142,
     "read_only": false,
     "read_only_alternatives": []
 }
