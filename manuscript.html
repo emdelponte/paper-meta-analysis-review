@@ -366,7 +366,7 @@ Phytopathology could not be fit on page. It will not be plotted.</code></pre>
 </div>
 </div>
 <p>Within an authorship network, co-authors (present in a same article) are linked together. Authors from this articles can be connected to authors from other articles whenever they appear together. Therefore, two articles are linked by a common author. Each author is then considered a <strong>node</strong> in the network and the connections between them are the <strong>edges</strong> or links. There are several statistics to calculate in a network analysis.</p>
-<p>For now, let’s visualize the authorship network and also the community structure which was defined via a function that tries to find densely connected subgraphs, also called communities. We will use a random walk algorithm for determining the communities. The idea is that short random walks tend to stay in the same community. In the network below, there are 15 communities or subgraphs which are represented by the colors.</p>
+<p>For now, let’s visualize the authorship network and also the community structure which was defined via a function that tries to find densely connected subgraphs, also called communities. We will use a random walk algorithm for determining the communities. The idea is that short random walks tend to stay in the same community. In the network below, the subgraphs are represented by the colors.</p>
 <div class="cell" data-paged.print="false">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># igraph</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
@@ -732,11 +732,11 @@ Piepho HP                               0.0</code></pre>
  3     1 response3 &lt;NA&gt;    
  4     1 response4 &lt;NA&gt;    
  5     1 response5 &lt;NA&gt;    
- 6     2 response1 index   
- 7     2 response2 yield   
- 8     2 response3 &lt;NA&gt;    
- 9     2 response4 &lt;NA&gt;    
-10     2 response5 &lt;NA&gt;    
+ 6    14 response1 cankers 
+ 7    14 response2 &lt;NA&gt;    
+ 8    14 response3 &lt;NA&gt;    
+ 9    14 response4 &lt;NA&gt;    
+10    14 response5 &lt;NA&gt;    
 # … with 415 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(es, rv, <span class="at">by =</span> <span class="st">"code"</span>) <span class="sc">|&gt;</span> </span>
@@ -827,17 +827,16 @@ Piepho HP                               0.0</code></pre>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabyl</span>(ma_model_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                    ma_model_2  n    percent valid_percent
-      fixed and random effects  4 0.04705882    0.05128205
-                 fixed effects  7 0.08235294    0.08974359
- Kruskall-Wallis one-way ANOVA  1 0.01176471    0.01282051
-             linear regression  1 0.01176471    0.01282051
-                 mixed effects 34 0.40000000    0.43589744
-                non-parametric  1 0.01176471    0.01282051
-      random and mixed-effects  3 0.03529412    0.03846154
-                random effects 24 0.28235294    0.30769231
-                random-effects  3 0.03529412    0.03846154
-                          &lt;NA&gt;  7 0.08235294            NA</code></pre>
+<pre><code>                ma_model_2  n    percent valid_percent
+ fixed- and random-effects  4 0.04705882    0.05128205
+             fixed-effects  7 0.08235294    0.08974359
+           Kruskall-Wallis  1 0.01176471    0.01282051
+         linear regression  1 0.01176471    0.01282051
+             mixed-effects 34 0.40000000    0.43589744
+            non-parametric  1 0.01176471    0.01282051
+ random- and mixed-effects  3 0.03529412    0.03846154
+            random-effects 27 0.31764706    0.34615385
+                      &lt;NA&gt;  7 0.08235294            NA</code></pre>
 </div>
 </div>
 </section>

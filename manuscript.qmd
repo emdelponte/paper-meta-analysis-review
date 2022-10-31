@@ -135,7 +135,7 @@ author_edge_list[1:10, ]
 
 Within an authorship network, co-authors (present in a same article) are linked together. Authors from this articles can be connected to authors from other articles whenever they appear together. Therefore, two articles are linked by a common author. Each author is then considered a **node** in the network and the connections between them are the **edges** or links. There are several statistics to calculate in a network analysis.
 
-For now, let's visualize the authorship network and also the community structure which was defined via a function that tries to find densely connected subgraphs, also called communities. We will use a random walk algorithm for determining the communities. The idea is that short random walks tend to stay in the same community. In the network below, there are 15 communities or subgraphs which are represented by the colors.
+For now, let's visualize the authorship network and also the community structure which was defined via a function that tries to find densely connected subgraphs, also called communities. We will use a random walk algorithm for determining the communities. The idea is that short random walks tend to stay in the same community. In the network below, the subgraphs are represented by the colors.
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 # igraph
