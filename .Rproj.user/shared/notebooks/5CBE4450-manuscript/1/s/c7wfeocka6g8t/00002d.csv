@@ -1,0 +1,4 @@
+"0",""
+"0","# Freeman (1977) proposes betweenness centrality as the number of shortest paths passing through a node. A higher value of a node impilies that other nodes are well connected through it."
+"0","between <- data.frame(round(betweenness(net), 1))"
+"0","between |> arrange(-round.betweenness.net...1.)|> head(10)"

@@ -1,0 +1,2 @@
+"0","degree <- enframe(degree(net))"
+"0","degree %>%  arrange(-value) |> head(10)"

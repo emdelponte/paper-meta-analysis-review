@@ -1,0 +1,3 @@
+"0",""
+"0","page <- data.frame(page_rank(net)$vector)"
+"0","page |> arrange(-page_rank.net..vector)|> head(10)"

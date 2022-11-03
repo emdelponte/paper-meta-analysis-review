@@ -1,0 +1,4 @@
+"0",""
+"0","# Eigenvector centrality (Bonabeau, 1972) is based on the idea that the importance of a node is recusively related to the importance of the nodes pointing to it. For example, your popularity depends on the popularity of your friends, whose popularity depends on their friends etc. Therefore, this measure is also self-referential in the sense that a node’s centrality depends on the centrality of another node, whose centrality depends the first node. A higher value of eigenvector centrality implies that a node’s neighbours are more prestigious than the neighbours of other nodes."
+"0","eigen <- data.frame(round(evcent(net)$vector, 5))"
+"0","eigen |> arrange(-round.evcent.net..vector..5.)|> head(10)"
