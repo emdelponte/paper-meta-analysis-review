@@ -1,4 +1,0 @@
-"0",""
-"0","# Authority score is another measure of centrality initially applied to the Web. A node has high authority when it is linked by many other nodes that are linking many other nodes. "
-"0","authority <- data.frame(authority_score(net)$vector)"
-"0","authority |> arrange(-authority_score.net..vector)|> head(10)"

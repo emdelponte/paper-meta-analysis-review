@@ -1,5 +1,0 @@
-"0",""
-"0","#Closeness centrality describes how close a given node is to any other node. It is usually defined as the inverse of the average of the shortest path between a node and all other nodes. Therefore, shorter paths between a node and any other node in the graph imply a higher value of the ratio. In constrast to the degree of a node, which describes the number of its direct connections, its closeness provides an idea of how well a node is indirectly connected via other nodes."
-"0",""
-"0","close <-data.frame(round(closeness(net), 10))"
-"0","close |> arrange(-round.closeness.net...10.)|> head(10)"
