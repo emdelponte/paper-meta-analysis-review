@@ -5,7 +5,7 @@ format:
     toc: true
 editor: visual
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ```{r}
@@ -88,11 +88,11 @@ nrow(tab2)
 ```{r}
 #| fig-width: 14
 #| fig-height: 7
-set.seed(1)
+set.seed(3)
 old_par <- par(mar = c(0, 2, 0, 0), bg = NA)
-p1 + wrap_elements(panel = ~wordcloud(words = tab2$journal, freq = tab2$n,  min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.25, colors=brewer.pal(6, "Dark2")))
-par(old_par)
-ggsave("figs/figure1.png", width = 14, height = 7, bg = "white")
+p1 + wrap_elements(panel = ~wordcloud(words = tab2$journal, freq = tab2$n,  min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.25, colors=brewer.pal(6, "Dark2"))) + plot_annotation(tag_levels = "A")
+par(old_par) 
+ggsave("figs/figure1.png", width = 15, height = 8, bg = "white")
 
 
 ```
@@ -106,6 +106,18 @@ dat %>%
 dat |> 
   tabyl(n_authors) |> 
   summary()
+
+dat |> 
+  tabyl(n_authors) |> 
+  ggplot(aes(n_authors, n))+
+  geom_col(fill = "#ACA4E2")+
+  scale_y_continuous(n.breaks = 10)+
+  scale_x_continuous(n.breaks = 10)+
+  theme(legend.position = "bottom",
+          panel.grid.major=element_line(colour="grey94"))+
+  labs(y = "Frequency", x = "Number of authors per paper")
+ggsave("figs/authors_paper.png", width = 5, height = 4, bg = "white")
+
 
 ```
 
@@ -126,6 +138,8 @@ nrow(authors)
 
 #paper per author
 authors
+
+write_csv(authors, "authors.csv")
 
 summary(authors$n)
 
@@ -345,7 +359,12 @@ dat |>
 dat |> 
   count(n_trials_total) |> 
   ggplot(aes(n_trials_total))+
-  geom_histogram(color = "white")
+  geom_histogram(color = "white", fill = "#ACA4E2")+
+  labs(x = "N. of trials/studies", y = "Frequency")+
+  scale_x_continuous(n.breaks = 10)+
+  theme(legend.position = "bottom",
+          panel.grid.major=element_line(colour="grey94"))
+ggsave("figs/trials_study.png", width =6, height =4, bg = "white")
 
 dat |> 
   count(n_trials_total) |> 
@@ -400,13 +419,15 @@ dat |>
 ## Effect sizes
 
 ```{r}
-dat %>% 
+es <- dat %>% 
   dplyr::select(effect_size_1, effect_size_2, effect_size_3, effect_size_4, effect_size_5) %>% 
   pivot_longer(names_to = "type", values_to = "value", 1:5) %>% 
   select(value) %>%
     filter(value != "NA") %>% 
   tabyl(value) |> 
   adorn_totals()
+es
+write_csv(es, "es.csv")
 ```
 
 ## Effect-size by common response variable
@@ -422,10 +443,14 @@ rv <- dat %>%
 
 rv
 
-left_join(es, rv, by = "code") |> 
+rv2 <- left_join(es, rv, by = "code") |> 
   select(Variable, value) |> 
   filter(Variable %in% c("severity", "incidence",  "yield", "index", "slope", "intercept")) |> 
   tabyl(value, Variable)
+
+rv2 
+
+write_csv(rv2, "es2.csv")
 ```
 
 ## Sampling variance
@@ -487,8 +512,15 @@ dat |>
 ## General software
 
 ```{r}
-dat |> 
-  tabyl(general_software)
+software <- dat |> 
+  tabyl(general_software) |> 
+  arrange(general_software)
+
+software
+
+write_csv(software, "software.csv")
+
+
 ```
 
 ```{r}
