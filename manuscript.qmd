@@ -4,6 +4,8 @@ format:
   html:
     toc: true
 editor: visual
+warning: false
+message: false
 editor_options: 
   chunk_output_type: console
 ---
@@ -63,10 +65,10 @@ p1 <- dat %>%
                                 2019, 2022))+
   theme(legend.position = "bottom",
           panel.grid.major=element_line(colour="grey94"))+
- scale_fill_discrete_qualitative(palette = "cold")+
+ scale_fill_viridis_d(option = "C")+
   scale_y_continuous(n.breaks = 10)+
   labs( x = "Publication year", y = "Number of publications")
-
+p1
 
 ```
 
@@ -110,7 +112,7 @@ dat |>
 dat |> 
   tabyl(n_authors) |> 
   ggplot(aes(n_authors, n))+
-  geom_col(fill = "#ACA4E2")+
+  geom_col(fill = "#0d0887")+
   scale_y_continuous(n.breaks = 10)+
   scale_x_continuous(n.breaks = 10)+
   theme(legend.position = "bottom",
@@ -169,7 +171,7 @@ author_edge_list[1:10, ]
 
 ```
 
-Within an authorship network, co-authors (present in a same article) are linked together. Authors from this articles can be connected to authors from other articles whenever they appear together. Therefore, two articles are linked by a common author. Each author is then considered a **node** in the network and the connections between them are the **edges** or links. There are several statistics to calculate in a network analysis.
+Within an authorship network, co-authors (present in a same article) are linked together. Authors from these articles can be connected to authors from other articles whenever they appear together. Therefore, two articles are linked by a common author. Each author is then considered a **node** in the network and the connections between them are the **edges** or links. There are several statistics to calculate in a network analysis.
 
 For now, let's visualize the authorship network and also the community structure which was defined via a function that tries to find densely connected subgraphs, also called communities. We will use a random walk algorithm for determining the communities. The idea is that short random walks tend to stay in the same community. In the network below, the subgraphs are represented by the colors.
 
@@ -232,7 +234,7 @@ edge_density(net)
 
 reciprocity(net)
 
-#transitivity, also known as clustering coefficient, measures that probability that adjacent nodes of a network are connected. In other words, if i is connected to j, and j is connected to k, what is the probability that i is also connected to k?
+# transitivity, also known as clustering coefficient, measures that probability that adjacent nodes of a network are connected. In other words, if i is connected to j, and j is connected to k, what is the probability that i is also connected to k?
 
 transitivity(net)
 
@@ -259,7 +261,7 @@ eb <- cluster_edge_betweenness(net)
 
 lec <- cluster_leading_eigen(net)
 
-#T he label propagation method labels each node with unique labels, and then updates these labels by choosing the label assigned to the majority of their neighbors, and repeat this iteratively until each node has the most common labels among its neighbors. 
+#  The label propagation method labels each node with unique labels, and then updates these labels by choosing the label assigned to the majority of their neighbors, and repeat this iteratively until each node has the most common labels among its neighbors. 
 cl <- cluster_label_prop(net)
 
 # Modularity
@@ -267,12 +269,29 @@ mod <- modularity(wc)
 ms <- membership(wc)
 
 net_stat <- asNetwork(net)
+
 png("figs/network1.png", res = 600,  width = 5000 , height = 5000, units="px")
 set.seed(11)
 par(mar=c(0,0,0,0))
 plot.network(net_stat, vertex.cex= 0.05 + 0.25*log(graph.strength(net)), 
-             label =ifelse(degree(net)>1000,V(net)$name,NA), label.bg = "white", label.col = "black", edge.col = "lightgray", edge.lty = 0.5, label.cex = 0.6,  displaylabels = FALSE, vertex.col = membership(eb), jitter = T, edge.len = 0.2, boxed.labels=T, label.border=1, pad=5)
+             label =ifelse(degree(net)>50,V(net)$name, NA), label.bg = "white", label.col = "black", edge.col = "gray", label.cex = 0.6,  displaylabels = TRUE, vertex.col = membership(wc), jitter = TRUE, edge.len = 0.2, boxed.labels= T, label.border="grey", pad=5)
 dev.off()
+
+
+library(networkD3)
+#get.edgelist(net)
+edge_df <- as.data.frame(get.edgelist(net))
+colnames(edge_df) <- c("from", "to")
+netD3 <- simpleNetwork(edge_df, zoom = T,
+              fontFamily = "Arial",
+              charge = -100,
+             # textColour = "black",
+              linkDistance = 50,
+              nodeColour = "black",
+              opacity = 0.65
+             )
+netD3
+ saveNetwork(netD3, file = 'network-SAD.html')
 ```
 
 ![](figs/network1.png){fig-align="center"}
@@ -311,11 +330,11 @@ p2 <- dat %>%
   filter(article_type == "Original Article") %>% 
   tabyl(data_source) %>% 
   ggplot(aes(reorder(data_source, -n), n, fill = n))+
-  geom_col(fill = "#ACA4E2", width = 0.56)+
-  geom_text(
-    aes(x = data_source, y = n, label = n),
-    position = position_dodge(width = 1),
-    vjust = -0.5, size = 4) + 
+  geom_col(fill = "#0d0887", width = 0.56)+
+  #geom_text(
+   # aes(x = data_source, y = n, label = n),
+    #position = position_dodge(width = 1),
+    #vjust = -0.5, size = 4) + 
   theme(legend.position = "bottom",
           panel.grid.major=element_line(colour="grey94"))+
 scale_y_continuous(breaks = c(0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30))+
@@ -359,8 +378,8 @@ dat |>
 dat |> 
   count(n_trials_total) |> 
   ggplot(aes(n_trials_total))+
-  geom_histogram(color = "white", fill = "#ACA4E2")+
-  labs(x = "N. of trials/studies", y = "Frequency")+
+  geom_histogram(color = "white", fill = "#0d0887")+
+  labs(x = "N. of studies in the meta-analysis", y = "Frequency")+
   scale_x_continuous(n.breaks = 10)+
   theme(legend.position = "bottom",
           panel.grid.major=element_line(colour="grey94"))
@@ -392,8 +411,8 @@ cbind(objective, type)
 
 ```{r}
 tab <- dat %>% 
-  dplyr::select(response1 , response2, response3, response4, response5) %>% 
-  pivot_longer(names_to = "type", values_to = "Variable", 1:5) %>% 
+  dplyr::select(response1 , response2, response3) %>% 
+  pivot_longer(names_to = "type", values_to = "Variable", 1:3) %>% 
   select(Variable) %>%
     filter(Variable != "NA") %>% 
   tabyl(Variable) %>% 
@@ -426,7 +445,8 @@ es <- dat %>%
     filter(value != "NA") %>% 
   tabyl(value) |> 
   adorn_totals()
-es
+es |> 
+  arrange(-n)
 write_csv(es, "es.csv")
 ```
 
@@ -445,7 +465,7 @@ rv
 
 rv2 <- left_join(es, rv, by = "code") |> 
   select(Variable, value) |> 
-  filter(Variable %in% c("severity", "incidence",  "yield", "index", "slope", "intercept")) |> 
+  filter(Variable %in% c("severity", "incidence",  "yield", "intensity")) |> 
   tabyl(value, Variable)
 
 rv2 
@@ -457,7 +477,7 @@ write_csv(rv2, "es2.csv")
 
 ```{r}
 dat |> 
-  tabyl(sampling_var)
+  tabyl(`Inverse variance`)
 
 ```
 
@@ -466,6 +486,14 @@ dat |>
 ```{r}
 dat |> 
   tabyl(`Heterogenity test`)
+```
+
+## Estimator
+
+```{r}
+ 
+dat |> 
+  tabyl(estimator)
 ```
 
 ## General approach
@@ -481,6 +509,10 @@ dat |>
 ```{r}
 dat |> 
   tabyl(ma_model)
+
+dat |> 
+  filter(ma_model == "MTC") |> 
+  tabyl(effect_size_1, effect_size_2)
 ```
 
 ## MA model n. of effects

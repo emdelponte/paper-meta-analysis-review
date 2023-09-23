@@ -1,10 +1,16 @@
-value,incidence,index,intercept,severity,slope,yield
-incidence ratio,2,0,0,0,0,0
-log means,4,4,0,12,0,18
-log of d,0,0,0,1,0,0
-log ratio,14,15,0,12,0,19
-mean diff,0,0,0,2,0,9
-means,11,8,18,7,18,29
-odds ratio,3,0,0,0,0,0
-response ratio,0,0,0,0,0,5
-NA,36,28,27,56,27,110
+value,incidence,intensity,severity,yield
+Cohen's d,0,1,0,1
+Hedges' g,0,3,0,0
+incidence ratio,3,0,0,0
+intercept,0,0,4,3
+log means,4,0,17,17
+log of d,0,0,1,0
+log ratio,14,0,18,19
+mean diff,1,1,2,9
+means,11,2,11,27
+odds ratio,3,0,0,0
+r,0,0,1,0
+response ratio,0,1,2,7
+risk ratio,0,1,0,0
+slope,0,0,5,4
+NA,39,31,84,118
